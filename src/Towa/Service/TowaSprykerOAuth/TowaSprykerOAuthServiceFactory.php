@@ -5,11 +5,11 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Service\TowaSprykerOauth;
+namespace Towa\Service\TowaSprykerOAuth;
 
-use Towa\Service\TowaSprykerOauth\Model\ClientRegistry;
-use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthConfigurationMap;
-use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthProviderFactory;
+use Towa\Service\TowaSprykerOAuth\Model\ClientRegistry;
+use Towa\Service\TowaSprykerOAuth\Plugin\SocialOAuth\SocialOAuthConfigurationMap;
+use Towa\Service\TowaSprykerOAuth\Plugin\SocialOAuth\SocialOAuthProviderFactory;
 use Spryker\Service\Kernel\AbstractServiceFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 

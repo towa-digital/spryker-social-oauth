@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Service\TowaSprykerOauth;
+namespace Towa\Service\TowaSprykerOAuth;
 
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use Spryker\Service\Kernel\AbstractService;
@@ -13,7 +13,7 @@ use Spryker\Service\Kernel\AbstractService;
 /**
  * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthServiceFactory getFactory()
  */
-class TowaSprykerOAuthService extends AbstractService implements TowaSprykerOauthServiceInterface
+class TowaSprykerOAuthService extends AbstractService implements TowaSprykerOAuthServiceInterface
 {
     /**
      * @param string $key

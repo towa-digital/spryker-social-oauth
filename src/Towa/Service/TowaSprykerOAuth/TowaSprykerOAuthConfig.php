@@ -7,11 +7,11 @@
 
 namespace Towa\Service\TowaSprykerOauth;
 
-use Towa\Shared\TowaSprykerOauth\TowaSprykerOauthConstants;
+use Towa\Shared\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 use Spryker\Service\Kernel\AbstractBundleConfig;
 
 /**
- * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthServiceFactory getFactory()
+ * @method \Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthServiceFactory getFactory()
  */
 class TowaSprykerOAuthConfig extends AbstractBundleConfig
 {
@@ -20,6 +20,6 @@ class TowaSprykerOAuthConfig extends AbstractBundleConfig
      */
     public function getKeyCloakConfig(): array
     {
-        return $this->get(TowaSprykerOauthConstants::KEYCLOAK_CONFIG, []);
+        return $this->get(TowaSprykerOAuthConstants::KEYCLOAK_CONFIG, []);
     }
 }
