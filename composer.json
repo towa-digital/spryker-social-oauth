@@ -12,5 +12,8 @@
             "name": "TOWA GmbH"
         }
     ],
-    "require": {}
+    "require": {
+        "knpuniversity/oauth2-client-bundle" : "*",
+        "league/oauth2-client" : "*"
+    }
 }
