@@ -11,7 +11,7 @@ use Spryker\Service\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Service\Kernel\Container;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class TowaSprykerOauthDependencyProvider extends AbstractBundleDependencyProvider
+class TowaSprykerOAuthDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const SERVICE_REQUEST_STACK = 'request_stack';
 

@@ -8,30 +8,30 @@
 namespace Towa\Service\TowaSprykerOauth;
 
 use Towa\Service\TowaSprykerOauth\Model\ClientRegistry;
-use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOauthConfigurationMap;
-use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOauthProviderFactory;
+use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthConfigurationMap;
+use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthProviderFactory;
 use Spryker\Service\Kernel\AbstractServiceFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthConfig getConfig()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthConfig getConfig()
  */
-class TowaSprykerOauthServiceFactory extends AbstractServiceFactory
+class TowaSprykerOAuthServiceFactory extends AbstractServiceFactory
 {
     /**
-     * @return \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOauthProviderFactory
+     * @return \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthProviderFactory
      */
-    public function createSocialOAuthProviderFactory(): SocialOauthProviderFactory
+    public function createSocialOAuthProviderFactory(): SocialOAuthProviderFactory
     {
-        return new SocialOauthProviderFactory();
+        return new SocialOAuthProviderFactory();
     }
 
     /**
-     * @return \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOauthConfigurationMap
+     * @return \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthConfigurationMap
      */
-    public function createSocialOauthConfigurationMap(): SocialOauthConfigurationMap
+    public function createSocialOauthConfigurationMap(): SocialOAuthConfigurationMap
     {
-        return new SocialOauthConfigurationMap($this->createSocialOAuthProviderFactory());
+        return new SocialOAuthConfigurationMap($this->createSocialOAuthProviderFactory());
     }
 
     /**
@@ -50,6 +50,6 @@ class TowaSprykerOauthServiceFactory extends AbstractServiceFactory
      */
     public function getRequestStack(): RequestStack
     {
-        return $this->getProvidedDependency(TowaSprykerOauthDependencyProvider::SERVICE_REQUEST_STACK);
+        return $this->getProvidedDependency(TowaSprykerOAuthDependencyProvider::SERVICE_REQUEST_STACK);
     }
 }

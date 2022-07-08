@@ -11,9 +11,9 @@ use Towa\Shared\TowaSprykerOauth\TowaSprykerOauthConstants;
 use Spryker\Service\Kernel\AbstractBundleConfig;
 
 /**
- * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthServiceFactory getFactory()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthServiceFactory getFactory()
  */
-class TowaSprykerOauthConfig extends AbstractBundleConfig
+class TowaSprykerOAuthConfig extends AbstractBundleConfig
 {
     /**
      * @return array

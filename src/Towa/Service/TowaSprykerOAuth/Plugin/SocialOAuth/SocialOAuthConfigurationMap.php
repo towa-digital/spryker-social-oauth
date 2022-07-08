@@ -7,17 +7,17 @@
 
 namespace Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth;
 
-class SocialOauthConfigurationMap
+class SocialOAuthConfigurationMap
 {
     /**
-     * @var \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOauthProviderFactory
+     * @var \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthProviderFactory
      */
-    private SocialOauthProviderFactory $socialOauthProviderFactory;
+    private SocialOAuthProviderFactory $socialOauthProviderFactory;
 
     /**
-     * @param \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOauthProviderFactory $socialOauthProviderFactory
+     * @param \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthProviderFactory $socialOauthProviderFactory
      */
-    public function __construct(SocialOauthProviderFactory $socialOauthProviderFactory)
+    public function __construct(SocialOAuthProviderFactory $socialOauthProviderFactory)
     {
         $this->socialOauthProviderFactory = $socialOauthProviderFactory;
     }

@@ -11,9 +11,9 @@ use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use Spryker\Service\Kernel\AbstractService;
 
 /**
- * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthServiceFactory getFactory()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthServiceFactory getFactory()
  */
-class TowaSprykerOauthService extends AbstractService implements TowaSprykerOauthServiceInterface
+class TowaSprykerOAuthService extends AbstractService implements TowaSprykerOauthServiceInterface
 {
     /**
      * @param string $key

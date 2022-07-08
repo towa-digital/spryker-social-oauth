@@ -12,9 +12,9 @@ use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\ProviderConfiguration\Keycl
 use Spryker\Service\Kernel\AbstractPlugin;
 
 /**
- * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthConfig getConfig()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthConfig getConfig()
  */
-class SocialOauthProviderFactory extends AbstractPlugin
+class SocialOAuthProviderFactory extends AbstractPlugin
 {
     /**
      * @return \KnpU\OAuth2ClientBundle\DependencyInjection\Providers\ProviderConfiguratorInterface

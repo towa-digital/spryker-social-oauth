@@ -10,9 +10,9 @@ namespace Towa\Service\SprykerSocialOauth;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 
 /**
- * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthServiceFactory getFactory()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthServiceFactory getFactory()
  */
-interface TowaSprykerOauthServiceInterface
+interface TowaSprykerOAuthServiceInterface
 {
     /**
      * Specifications:
