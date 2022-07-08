@@ -1,0 +1,16 @@
+{
+    "name": "towa-digital/spryker-social-oauth",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TowaDigital\\SprykerSocialOauth\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "TOWA GmbH"
+        }
+    ],
+    "require": {}
+}
