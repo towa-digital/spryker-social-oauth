@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Service\SprykerSocialOauth;
+namespace Towa\Service\TowaSprykerOAuth;
 
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 

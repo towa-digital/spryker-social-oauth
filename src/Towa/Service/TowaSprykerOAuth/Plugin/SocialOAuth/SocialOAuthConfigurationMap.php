@@ -15,7 +15,7 @@ class SocialOAuthConfigurationMap
     private SocialOAuthProviderFactory $socialOauthProviderFactory;
 
     /**
-     * @param \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthProviderFactory $socialOauthProviderFactory
+     * @param SocialOAuthProviderFactory $socialOauthProviderFactory
      */
     public function __construct(SocialOAuthProviderFactory $socialOauthProviderFactory)
     {
