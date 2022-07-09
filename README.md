@@ -9,3 +9,5 @@ OAuth login provide.
 docker/sdk cli composer require "towa/spryker-social-oauth" --no-update
 docker/sdk cli composer update "towa/spryker-social-oauth"
 ```
+
+Zoltan: test
