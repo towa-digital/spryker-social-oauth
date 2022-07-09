@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 
 class AgentKeycloakAuthenticator extends SocialAuthenticator
 {
@@ -76,7 +77,7 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
         return $request->query->get('code') &&
             $request->query->get('state') &&
             $request->query->get('session_state') &&
-            str_contains($request->getPathInfo(), AgentPageRouteProviderPlugin::ROUTE_NAME_AGENT_LOGIN_CHECK);
+            str_contains($request->getPathInfo(), TowaSprykerOAuthConstants::TOWA_SPRYKER_ROUTE_NAME_AGENT_LOGIN_CHECK);
     }
 
     /**
