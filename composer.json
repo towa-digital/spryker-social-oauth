@@ -2,11 +2,6 @@
     "name": "gabsi/spryker-social-oauth",
     "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Towa\\": "src/Towa"
-        }
-    },
     "authors": [
         {
             "name": "TOWA GmbH"
@@ -31,5 +26,18 @@
         "spryker/util-text": "^1.1.0",
         "propel/propel": "~2.0@dev",
         "spryker/user": "^3.13"
+    },
+    "suggest": {},
+    "autoload": {
+        "psr-4": {
+            "Towa\\": "src/Towa/"
+        }
+    },
+    "autoload-dev": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {},
+    "config": {
+        "sort-packages": true
     }
 }
