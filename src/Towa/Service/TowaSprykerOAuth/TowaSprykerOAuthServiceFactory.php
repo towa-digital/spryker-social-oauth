@@ -8,8 +8,6 @@
 namespace Towa\Service\TowaSprykerOAuth;
 
 use Towa\Service\TowaSprykerOAuth\Model\ClientRegistry;
-use Towa\Service\TowaSprykerOAuth\Plugin\SocialOAuth\SocialOAuthConfigurationMap;
-use Towa\Service\TowaSprykerOAuth\Plugin\SocialOAuth\SocialOAuthProviderFactory;
 use Spryker\Service\Kernel\AbstractServiceFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -18,21 +16,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class TowaSprykerOAuthServiceFactory extends AbstractServiceFactory
 {
-    /**
-     * @return \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthProviderFactory
-     */
-    public function createSocialOAuthProviderFactory(): SocialOAuthProviderFactory
-    {
-        return new SocialOAuthProviderFactory();
-    }
-
-    /**
-     * @return \Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\SocialOAuthConfigurationMap
-     */
-    public function createSocialOauthConfigurationMap(): SocialOAuthConfigurationMap
-    {
-        return new SocialOAuthConfigurationMap($this->createSocialOAuthProviderFactory());
-    }
 
     /**
      * @return \Towa\Service\TowaSprykerOauth\Model\ClientRegistry
@@ -41,7 +24,8 @@ class TowaSprykerOAuthServiceFactory extends AbstractServiceFactory
     {
         return new ClientRegistry(
             $this->getRequestStack(),
-            $this->createSocialOauthConfigurationMap()->getOauthProviderServices()
+            $this->getConfig()->getAllSupportedTypes(),
+            $this->getConfig()->getAuthConfig()
         );
     }
 

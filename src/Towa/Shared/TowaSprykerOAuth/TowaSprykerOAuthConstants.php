@@ -9,5 +9,5 @@ namespace Towa\Service\TowaSprykerOAuth;
 
 interface TowaSprykerOAuthConstants
 {
-    public const KEYCLOAK_CONFIG = 'KEYCLOAK_CONFIG';
+    public const TOWA_SPRYKER_AUTH_CONFIG = 'TOWA_SPRYKER_AUTH_CONFIG';
 }

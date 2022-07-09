@@ -10,12 +10,14 @@
     "authors": [
         {
             "name": "TOWA GmbH"
+        },
+        {
+            "name": "Lukas Gabsi",
+            "email": "lukas.gabsi@gmail.com"
         }
     ],
     "require": {
         "knpuniversity/oauth2-client-bundle" : "*",
-        "league/oauth2-client" : "*",
-        "league/oauth2-github" : "*",
-        "stevenmaguire/oauth2-keycloak" : "*"
+        "league/oauth2-client" : "*"
     }
 }
