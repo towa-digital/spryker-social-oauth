@@ -10,13 +10,15 @@
     "authors": [
         {
             "name": "TOWA GmbH"
+        },
+        {
+            "name": "Lukas Gabsi",
+            "email": "lukas.gabsi@gmail.com"
         }
     ],
     "require": {
         "knpuniversity/oauth2-client-bundle" : "*",
         "league/oauth2-client" : "*",
-        "league/oauth2-github" : "*",
-        "stevenmaguire/oauth2-keycloak" : "*",
         "spryker/gui": "^3.33.0",
         "spryker/kernel": "^3.30.0",
         "spryker/security-extension": "^1.0.0",

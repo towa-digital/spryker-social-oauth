@@ -8,24 +8,22 @@
 namespace Towa\Yves\TowaSprykerOAuth\Authentication;
 
 use Exception;
-use Generated\Shared\Transfer\UserTransfer;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+use Towa\Service\TowaSprykerOauth\Plugin\PostGetUser\PostGetUserInterface;
 use Pyz\Client\User\UserClientInterface;
 use Pyz\Service\TowaOauth\Plugin\SocialOAuth\Provider\Keycloak;
-use Pyz\Yves\AgentPage\Plugin\Authentication\AgentPageSecurityPlugin;
-use Pyz\Yves\AgentPage\Plugin\Handler\AgentAuthenticationSuccessHandler;
-use Pyz\Yves\AgentPage\Plugin\Router\AgentPageRouteProviderPlugin;
-use Ramsey\Uuid\Uuid;
 use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationFailureHandler;
-use SprykerShop\Yves\AgentPage\Security\Agent;
+use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationSuccessHandler;
+use SprykerShop\Yves\AgentPage\Plugin\Router\AgentPageRouteProviderPlugin;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 
 class AgentKeycloakAuthenticator extends SocialAuthenticator
 {
@@ -38,6 +36,11 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
     private UserClientInterface $userClient;
 
     /**
+     * @var PostGetUserInterface[] $parameterFilters
+     */
+    private array $postGetUserPlugins;
+
+    /**
      * @param \Pyz\Service\TowaOauth\Plugin\SocialOAuth\Provider\Keycloak $keycloakProvider
      * @param \KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface $keycloakClient
      * @param \Pyz\Client\User\UserClientInterface $userClient
@@ -45,11 +48,14 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
     public function __construct(
         Keycloak $keycloakProvider,
         OAuth2ClientInterface $keycloakClient,
-        UserClientInterface $userClient
+        UserClientInterface $userClient,
+        array $postGetUserPlugins = []
+
     ) {
         $this->keycloakClient = $keycloakClient;
         $this->keycloakProvider = $keycloakProvider;
         $this->userClient = $userClient;
+        $this->postGetUserPlugins = $postGetUserPlugins;
     }
 
     /**
@@ -71,7 +77,7 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
         return $request->query->get('code') &&
             $request->query->get('state') &&
             $request->query->get('session_state') &&
-            str_contains($request->getPathInfo(), AgentPageRouteProviderPlugin::ROUTE_NAME_AGENT_LOGIN_CHECK);
+            str_contains($request->getPathInfo(), TowaSprykerOAuthConstants::TOWA_SPRYKER_ROUTE_NAME_AGENT_LOGIN_CHECK);
     }
 
     /**
@@ -94,7 +100,7 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        /** @var \Pyz\Service\TowaOauth\Plugin\SocialOAuth\ResourceOwner\KeycloakResourceOwner $resourceOwner */
+        /** @var ResourceOwnerInterface $resourceOwner */
         $resourceOwner = $this->keycloakClient->fetchUserFromToken($credentials);
 
         if (!$resourceOwner->getEmail()) {
@@ -103,36 +109,14 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
 
         $user = $userProvider->loadUserByUsername($resourceOwner->getEmail());
 
-        if (!$user->getUsername()) {
-            $resourceOwnerData = $resourceOwner->toArray();
-            $userTransfer = (new UserTransfer())
-                ->setUsername($resourceOwner->getEmail())
-                ->setFirstName($resourceOwnerData['given_name'])
-                ->setLastName($resourceOwnerData['family_name'])
-                ->setPassword(Uuid::uuid5(Uuid::NAMESPACE_OID, $resourceOwner->getEmail()))
-                ->setStatus('active')
-                ->setIsAgent(true);
-            // FYI: locale is not yet returned and will be set to EN by default.
-
-            $userTransfer = $this->userClient->createUser($userTransfer);
-            $user = $this->createSecurityUser($userTransfer);
+        foreach($this->postGetUserPlugins as $postGetUserPlugin) {
+            $user = $postGetUserPlugin->execute($user, $resourceOwner);
         }
 
         return $user;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Symfony\Component\Security\Core\User\UserInterface
-     */
-    public function createSecurityUser(UserTransfer $userTransfer): UserInterface
-    {
-        return new Agent(
-            $userTransfer,
-            [AgentPageSecurityPlugin::ROLE_AGENT, AgentPageSecurityPlugin::ROLE_ALLOWED_TO_SWITCH]
-        );
-    }
+
 
     /**
      * @inheritDoc
