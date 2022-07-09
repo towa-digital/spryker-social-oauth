@@ -1,5 +1,5 @@
 {
-    "name": "towa-digital/spryker-social-oauth",
+    "name": "gabsi/spryker-social-oauth",
     "type": "library",
     "license": "MIT",
     "autoload": {
