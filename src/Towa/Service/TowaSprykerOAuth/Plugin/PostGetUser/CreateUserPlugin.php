@@ -3,24 +3,21 @@
 namespace Towa\Service\TowaSprykerOauth\Plugin\PostGetUser;
 
 use Generated\Shared\Transfer\UserTransfer;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Ramsey\Uuid\Uuid;
+use SprykerShop\Yves\AgentPage\Plugin\Security\AgentPageSecurityPlugin;
+use SprykerShop\Yves\AgentPage\Security\Agent;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Towa\Service\TowaSprykerOauth\Plugin\SocialOAuth\ResourceOwner\KeycloakResourceOwner;
 
 class CreateUserPlugin implements PostGetUserInterface
 {
-    public function __construct($user)
-    {
-
-    }
-
     /**
      * @param UserInterface $user
-     * @param KeycloakResourceOwner $resourceOwner
+     * @param ResourceOwnerInterface $resourceOwner
      *
      * @return mixed|void
      */
-    public function execute(UserInterface $user, KeycloakResourceOwner $resourceOwner)
+    public function execute(UserInterface $user, ResourceOwnerInterface $resourceOwner)
     {
         if (!$user->getUsername()) {
             $resourceOwnerData = $resourceOwner->toArray();
@@ -36,5 +33,18 @@ class CreateUserPlugin implements PostGetUserInterface
             $userTransfer = $this->userClient->createUser($userTransfer);
             $user = $this->createSecurityUser($userTransfer);
         }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
+     *
+     * @return \Symfony\Component\Security\Core\User\UserInterface
+     */
+    public function createSecurityUser(UserTransfer $userTransfer): UserInterface
+    {
+        return new Agent(
+            $userTransfer,
+            [AgentPageSecurityPlugin::ROLE_AGENT, AgentPageSecurityPlugin::ROLE_ALLOWED_TO_SWITCH]
+        );
     }
 }

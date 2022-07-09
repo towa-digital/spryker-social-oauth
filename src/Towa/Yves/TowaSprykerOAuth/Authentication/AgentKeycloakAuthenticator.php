@@ -8,27 +8,21 @@
 namespace Towa\Yves\TowaSprykerOAuth\Authentication;
 
 use Exception;
-use Generated\Shared\Transfer\UserTransfer;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
-use PostGetUserInterface;
+use Towa\Service\TowaSprykerOauth\Plugin\PostGetUser\PostGetUserInterface;
 use Pyz\Client\User\UserClientInterface;
 use Pyz\Service\TowaOauth\Plugin\SocialOAuth\Provider\Keycloak;
-use Ramsey\Uuid\Uuid;
 use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationFailureHandler;
 use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationSuccessHandler;
 use SprykerShop\Yves\AgentPage\Plugin\Router\AgentPageRouteProviderPlugin;
-use SprykerShop\Yves\AgentPage\Plugin\Security\AgentPageSecurityPlugin;
-use SprykerShop\Yves\AgentPage\Security\Agent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Towa\Service\TowaSprykerOauth\Plugin\PostGetUser\PostGetUserInterface;
 
 class AgentKeycloakAuthenticator extends SocialAuthenticator
 {
@@ -121,18 +115,7 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
         return $user;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Symfony\Component\Security\Core\User\UserInterface
-     */
-    public function createSecurityUser(UserTransfer $userTransfer): UserInterface
-    {
-        return new Agent(
-            $userTransfer,
-            [AgentPageSecurityPlugin::ROLE_AGENT, AgentPageSecurityPlugin::ROLE_ALLOWED_TO_SWITCH]
-        );
-    }
+
 
     /**
      * @inheritDoc
