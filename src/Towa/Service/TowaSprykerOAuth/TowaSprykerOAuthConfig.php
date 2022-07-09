@@ -7,7 +7,7 @@
 
 namespace Towa\Service\TowaSprykerOauth;
 
-use Towa\Shared\TowaSprykerOAuth\TowaSprykerOAuthConstants;
+use Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 use Spryker\Service\Kernel\AbstractBundleConfig;
 
 /**
