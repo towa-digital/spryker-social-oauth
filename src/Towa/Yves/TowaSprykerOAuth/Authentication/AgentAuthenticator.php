@@ -10,6 +10,7 @@ namespace Towa\Yves\TowaSprykerOAuth\Authentication;
 use Exception;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
+use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Towa\Service\TowaSprykerOauth\Plugin\PostGetUser\PostGetUserInterface;
 use Pyz\Client\User\UserClientInterface;
@@ -25,13 +26,15 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 
-class AgentKeycloakAuthenticator extends SocialAuthenticator
+class AgentAuthenticator extends SocialAuthenticator
 {
-    public const AUTHENTICATOR_KEY = 'AGENT_KEYCLOAK_AUTHENTICATOR';
+    public const AUTHENTICATOR_KEY = 'AGENT_AUTHENTICATOR';
 
-    private Keycloak $keycloakProvider;
+    public const AUTHORIZATION_CODE = 'authorization_code';
 
-    private OAuth2ClientInterface $keycloakClient;
+    private AbstractProvider $provider;
+
+    private OAuth2ClientInterface $providerClient;
 
     private UserClientInterface $userClient;
 
@@ -41,19 +44,19 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
     private array $postGetUserPlugins;
 
     /**
-     * @param \Pyz\Service\TowaOauth\Plugin\SocialOAuth\Provider\Keycloak $keycloakProvider
-     * @param \KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface $keycloakClient
+     * @param \League\OAuth2\Client\Provider\AbstractProvider $provider
+     * @param \KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface $providerClient
      * @param \Pyz\Client\User\UserClientInterface $userClient
      */
     public function __construct(
-        Keycloak $keycloakProvider,
-        OAuth2ClientInterface $keycloakClient,
+        AbstractProvider $provider,
+        OAuth2ClientInterface $providerClient,
         UserClientInterface $userClient,
         array $postGetUserPlugins = []
 
     ) {
-        $this->keycloakClient = $keycloakClient;
-        $this->keycloakProvider = $keycloakProvider;
+        $this->providerClient = $providerClient;
+        $this->provider = $provider;
         $this->userClient = $userClient;
         $this->postGetUserPlugins = $postGetUserPlugins;
     }
@@ -74,10 +77,7 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
      */
     public function supports(Request $request)
     {
-        return $request->query->get('code') &&
-            $request->query->get('state') &&
-            $request->query->get('session_state') &&
-            str_contains($request->getPathInfo(), TowaSprykerOAuthConstants::TOWA_SPRYKER_ROUTE_NAME_AGENT_LOGIN_CHECK);
+        return str_contains($request->getPathInfo(), TowaSprykerOAuthConstants::ROUTE_NAME_AGENT_LOGIN_CHECK);
     }
 
     /**
@@ -85,11 +85,8 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        $code = $request->query->get('code');
-
-        return $this->keycloakProvider->getAccessToken(
-            'authorization_code',
-            ['code' => $code]
+        return $this->provider->getAccessToken(
+            self::AUTHORIZATION_CODE
         );
     }
 
@@ -101,7 +98,7 @@ class AgentKeycloakAuthenticator extends SocialAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         /** @var ResourceOwnerInterface $resourceOwner */
-        $resourceOwner = $this->keycloakClient->fetchUserFromToken($credentials);
+        $resourceOwner = $this->providerClient->fetchUserFromToken($credentials);
 
         if (!$resourceOwner->getEmail()) {
             throw new Exception('No email given for resourceOwner');

@@ -10,5 +10,5 @@ namespace Towa\Service\TowaSprykerOAuth;
 interface TowaSprykerOAuthConstants
 {
     public const TOWA_SPRYKER_AUTH_CONFIG = 'TOWA_SPRYKER_AUTH_CONFIG';
-    public const TOWA_SPRYKER_ROUTE_NAME_AGENT_LOGIN_CHECK = '/agent/login_check';
+    public const ROUTE_NAME_AGENT_LOGIN_CHECK = '/agent/login_check';
 }
