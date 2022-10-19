@@ -18,7 +18,7 @@ use Symfony\Component\Security\Guard\Token\PreAuthenticationGuardToken;
 use Towa\Yves\TowaSprykerOAuth\Authentication\AgentAuthenticator;
 use UnexpectedValueException;
 
-class AgentKeycloakAuthenticationProvider implements AuthenticationProviderInterface
+class AgentAuthenticationProvider implements AuthenticationProviderInterface
 {
     private AgentAuthenticator $agentAuthenticator;
 
