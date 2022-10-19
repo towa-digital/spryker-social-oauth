@@ -1,7 +1,8 @@
 {
     "name": "gabsi/spryker-social-oauth",
     "type": "library",
-    "license": "MIT",
+    "description": "Social OAuth Module for Spryker",
+    "license": "proprietary",
     "authors": [
         {
             "name": "TOWA GmbH"
@@ -30,7 +31,8 @@
     "suggest": {},
     "autoload": {
         "psr-4": {
-            "Towa\\": "src/Towa/"
+            "Towa\\": "src/Towa/",
+            "Spryker\\": "src/Spryker"
         }
     },
     "autoload-dev": {},
