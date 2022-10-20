@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Yves\TowaSprykerOAuth\Authentication\Security\Provider;
+namespace Towa\Yves\TowaSprykerOauth\Authentication\Security\Provider;
 
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserChecker;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Token\PreAuthenticationGuardToken;
-use Towa\Yves\TowaSprykerOAuth\Authentication\AgentAuthenticator;
+use Towa\Yves\TowaSprykerOauth\Authentication\AgentAuthenticator;
 use UnexpectedValueException;
 
 class AgentAuthenticationProvider implements AuthenticationProviderInterface
@@ -29,7 +29,7 @@ class AgentAuthenticationProvider implements AuthenticationProviderInterface
     private string $providerKey;
 
     /**
-     * @param \Towa\Yves\TowaSprykerOAuth\Authentication\AgentAuthenticator $agentAuthenticator
+     * @param \Towa\Yves\TowaSprykerOauth\Authentication\AgentAuthenticator $agentAuthenticator
      * @param \Symfony\Component\Security\Core\User\UserProviderInterface $agentUserProvider
      * @param \Symfony\Component\Security\Core\User\UserChecker $userChecker
      */

@@ -5,7 +5,7 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Yves\TowaSprykerOAuth\Authentication;
+namespace Towa\Yves\TowaSprykerOauth\Authentication;
 
 use Exception;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Towa\Shared\TowaSprykerOAuth\TowaSprykerOAuthConstants;
+use Towa\Shared\TowaSprykerOauth\TowaSprykerOauthConstants;
 
 class AgentAuthenticator extends SocialAuthenticator
 {
@@ -81,7 +81,7 @@ class AgentAuthenticator extends SocialAuthenticator
      */
     public function supports(Request $request)
     {
-        return str_contains($request->getPathInfo(), TowaSprykerOAuthConstants::ROUTE_NAME_AGENT_LOGIN_CHECK);
+        return str_contains($request->getPathInfo(), TowaSprykerOauthConstants::ROUTE_NAME_AGENT_LOGIN_CHECK);
     }
 
     /**

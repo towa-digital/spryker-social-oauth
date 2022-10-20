@@ -5,14 +5,14 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Service\TowaSprykerOAuth;
+namespace Towa\Service\TowaSprykerOauth;
 
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 
 /**
- * @method \Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthServiceFactory getFactory()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthServiceFactory getFactory()
  */
-interface TowaSprykerOAuthServiceInterface
+interface TowaSprykerOauthServiceInterface
 {
     /**
      * Specifications:
