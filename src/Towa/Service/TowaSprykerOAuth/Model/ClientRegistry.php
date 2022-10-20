@@ -56,7 +56,7 @@ class ClientRegistry
     public function getClient(string $key): OAuth2ClientInterface
     {
         if (isset($this->servicesMap[$key])) {
-            $client = $this->createClient($this->servicesMap[$key], $this->config[$key]);
+            $client = $this->createClient(new $this->servicesMap[$key], $this->config[$key]);
             if (!$client instanceof OAuth2ClientInterface) {
                 throw new InvalidArgumentException(sprintf('Somehow the "%s" client is not an instance of OAuth2ClientInterface.', $key));
             }
@@ -77,7 +77,7 @@ class ClientRegistry
     public function getProvider(string $key): AbstractProvider
     {
         if (isset($this->servicesMap[$key])) {
-            return $this->createProvider($this->servicesMap[$key], $this->config[$key]);
+            return $this->createProvider(new $this->servicesMap[$key], $this->config[$key]);
         }
 
         throw new InvalidArgumentException(sprintf('There is no OAuth2 client called "%s". Available are: %s', $key, implode(', ', array_keys($this->servicesMap))));
