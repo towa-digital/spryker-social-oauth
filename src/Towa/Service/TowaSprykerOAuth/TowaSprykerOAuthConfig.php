@@ -66,6 +66,7 @@ use KnpU\OAuth2ClientBundle\DependencyInjection\Providers\YahooProviderConfigura
 use KnpU\OAuth2ClientBundle\DependencyInjection\Providers\YandexProviderConfigurator;
 use KnpU\OAuth2ClientBundle\DependencyInjection\Providers\ZendeskProviderConfigurator;
 use Spryker\Service\Kernel\AbstractBundleConfig;
+use Towa\Shared\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 
 /**
  * @method \Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthServiceFactory getFactory()

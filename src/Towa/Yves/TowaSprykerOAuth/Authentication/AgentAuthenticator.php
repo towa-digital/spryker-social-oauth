@@ -14,7 +14,6 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Towa\Service\TowaSprykerOauth\Plugin\PostGetUser\PostGetUserInterface;
 use Pyz\Client\User\UserClientInterface;
-use Pyz\Service\TowaOauth\Plugin\SocialOAuth\Provider\Keycloak;
 use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationFailureHandler;
 use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationSuccessHandler;
 use SprykerShop\Yves\AgentPage\Plugin\Router\AgentPageRouteProviderPlugin;
