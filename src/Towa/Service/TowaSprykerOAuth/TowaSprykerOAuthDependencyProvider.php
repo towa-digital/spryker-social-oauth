@@ -5,13 +5,13 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Service\TowaSprykerOAuth;
+namespace Towa\Service\TowaSprykerOauth;
 
 use Spryker\Service\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Service\Kernel\Container;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class TowaSprykerOAuthDependencyProvider extends AbstractBundleDependencyProvider
+class TowaSprykerOauthDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const SERVICE_REQUEST_STACK = 'request_stack';
 

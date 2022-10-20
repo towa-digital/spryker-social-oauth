@@ -1,4 +1,4 @@
-# TowaSprykerOAuth Module
+# TowaSprykerOauth Module
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
 
 A Spryker wrapper for [`knpuniversity/oauth2-client-bundle`](https://github.com/knpuniversity/oauth2-client-bundle)
@@ -19,9 +19,9 @@ In your `config_default.php` add your provider configuration. E.g.
 ```
 // config-default.php
 
-use Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthConstants;
+use Towa\Service\TowaSprykerOauth\TowaSprykerOauthConstants;
 
-$config[TowaSprykerOAuthConstants::TOWA_SPRYKER_AUTH_CONFIG] = [
+$config[TowaSprykerOauthConstants::TOWA_SPRYKER_AUTH_CONFIG] = [
     'github' => [
         'clientId'          => '{github-client-id}',
         'clientSecret'      => '{github-client-secret}',
@@ -150,7 +150,7 @@ class SecurityFactory extends SprykerSecurityFactory
     }
 
     /**
-     * @return \Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthServiceInterface
+     * @return \Towa\Service\TowaSprykerOauth\TowaSprykerOauthServiceInterface
      */
     public function getTowaOauthService(): TowaOauthServiceInterface
     {
@@ -232,7 +232,7 @@ class SecurityDependencyProvider extends SprykerSecurityDependencyProvider
     private function addTowaOauthService(Container $container): Container
     {
         $container->set(static::SERVICE_TOWAOAUTH, function (Container $container): TowaOauthServiceInterface {
-            return $container->getLocator()->towaSprykerOauth()->service();
+            return $container->getLocator()->TowaSprykerOauth()->service();
         });
 
         return $container;

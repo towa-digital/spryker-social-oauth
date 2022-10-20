@@ -66,12 +66,12 @@ use KnpU\OAuth2ClientBundle\DependencyInjection\Providers\YahooProviderConfigura
 use KnpU\OAuth2ClientBundle\DependencyInjection\Providers\YandexProviderConfigurator;
 use KnpU\OAuth2ClientBundle\DependencyInjection\Providers\ZendeskProviderConfigurator;
 use Spryker\Service\Kernel\AbstractBundleConfig;
-use Towa\Shared\TowaSprykerOAuth\TowaSprykerOAuthConstants;
+use Towa\Shared\TowaSprykerOauth\TowaSprykerOauthConstants;
 
 /**
- * @method \Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthServiceFactory getFactory()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthServiceFactory getFactory()
  */
-class TowaSprykerOAuthConfig extends AbstractBundleConfig
+class TowaSprykerOauthConfig extends AbstractBundleConfig
 {
 
     /** @var array */
@@ -149,6 +149,6 @@ class TowaSprykerOAuthConfig extends AbstractBundleConfig
      */
     public function getAuthConfig(): array
     {
-        return $this->get(TowaSprykerOAuthConstants::TOWA_SPRYKER_AUTH_CONFIG, []);
+        return $this->get(TowaSprykerOauthConstants::TOWA_SPRYKER_AUTH_CONFIG, []);
     }
 }

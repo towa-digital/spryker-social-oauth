@@ -5,16 +5,16 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-namespace Towa\Service\TowaSprykerOAuth;
+namespace Towa\Service\TowaSprykerOauth;
 
-use Towa\Service\TowaSprykerOAuth\Model\ClientRegistry;
+use Towa\Service\TowaSprykerOauth\Model\ClientRegistry;
 use Spryker\Service\Kernel\AbstractServiceFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOAuthConfig getConfig()
+ * @method \Towa\Service\TowaSprykerOauth\TowaSprykerOauthConfig getConfig()
  */
-class TowaSprykerOAuthServiceFactory extends AbstractServiceFactory
+class TowaSprykerOauthServiceFactory extends AbstractServiceFactory
 {
 
     /**
@@ -34,6 +34,6 @@ class TowaSprykerOAuthServiceFactory extends AbstractServiceFactory
      */
     public function getRequestStack(): RequestStack
     {
-        return $this->getProvidedDependency(TowaSprykerOAuthDependencyProvider::SERVICE_REQUEST_STACK);
+        return $this->getProvidedDependency(TowaSprykerOauthDependencyProvider::SERVICE_REQUEST_STACK);
     }
 }
