@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Towa\Service\TowaSprykerOAuth\TowaSprykerOAuthConstants;
+use Towa\Shared\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 
 class AgentAuthenticator extends SocialAuthenticator
 {
