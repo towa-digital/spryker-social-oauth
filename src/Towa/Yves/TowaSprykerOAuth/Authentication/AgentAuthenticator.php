@@ -85,7 +85,8 @@ class AgentAuthenticator extends SocialAuthenticator
     public function getCredentials(Request $request)
     {
         return $this->provider->getAccessToken(
-            self::AUTHORIZATION_CODE
+            self::AUTHORIZATION_CODE,
+            $request->query->all()
         );
     }
 
