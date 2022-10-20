@@ -75,7 +75,7 @@ class TowaSprykerOAuthConfig extends AbstractBundleConfig
 {
 
     /** @var array */
-    private static $supportedProviderTypes = [
+    protected static $supportedProviderTypes = [
         'amazon' => AmazonProviderConfigurator::class,
         'appid' => AppIdProviderConfigurator::class,
         'apple' => AppleProviderConfigurator::class,
