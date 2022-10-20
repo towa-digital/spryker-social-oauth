@@ -34,9 +34,9 @@ class AgentAuthenticator extends SocialAuthenticator
 
     private OAuth2ClientInterface $providerClient;
 
-    private AuthenticationSuccessHandler $successHandler;
+    private AuthenticationSuccessHandlerInterface $successHandler;
 
-    private AuthenticationFailureHandler $failureHandler;
+    private AuthenticationFailureHandlerInterface $failureHandler;
 
     /**
      * @var PostGetUserInterface[] $parameterFilters
