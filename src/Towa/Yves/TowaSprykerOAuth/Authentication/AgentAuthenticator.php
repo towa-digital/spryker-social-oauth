@@ -13,15 +13,13 @@ use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Towa\Service\TowaSprykerOauth\Plugin\PostGetUser\PostGetUserInterface;
-use Pyz\Client\User\UserClientInterface;
-use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationFailureHandler;
-use SprykerShop\Yves\AgentPage\Plugin\Handler\AgentAuthenticationSuccessHandler;
 use SprykerShop\Yves\AgentPage\Plugin\Router\AgentPageRouteProviderPlugin;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Towa\Shared\TowaSprykerOAuth\TowaSprykerOAuthConstants;
 
@@ -35,7 +33,9 @@ class AgentAuthenticator extends SocialAuthenticator
 
     private OAuth2ClientInterface $providerClient;
 
-    private UserClientInterface $userClient;
+    private AuthenticationSuccessHandler $successHandler;
+
+    private AuthenticationFailureHandler $failureHandler;
 
     /**
      * @var PostGetUserInterface[] $parameterFilters
@@ -45,18 +45,22 @@ class AgentAuthenticator extends SocialAuthenticator
     /**
      * @param \League\OAuth2\Client\Provider\AbstractProvider $provider
      * @param \KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface $providerClient
-     * @param \Pyz\Client\User\UserClientInterface $userClient
+     * @param \Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface $successHandler
+     * @param \Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface $failureHandler
+     * @param \Towa\Service\TowaSprykerOauth\Plugin\PostGetUser\PostGetUserInterface[] $postGetUserPlugins
      */
     public function __construct(
         AbstractProvider $provider,
         OAuth2ClientInterface $providerClient,
-        UserClientInterface $userClient,
+        AuthenticationSuccessHandlerInterface $successHandler,
+        AuthenticationFailureHandlerInterface $failureHandler,
         array $postGetUserPlugins = []
 
     ) {
         $this->providerClient = $providerClient;
         $this->provider = $provider;
-        $this->userClient = $userClient;
+        $this->successHandler = $successHandler;
+        $this->failureHandler = $failureHandler;
         $this->postGetUserPlugins = $postGetUserPlugins;
     }
 
@@ -113,14 +117,12 @@ class AgentAuthenticator extends SocialAuthenticator
         return $user;
     }
 
-
-
     /**
      * @inheritDoc
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return (new AgentAuthenticationFailureHandler())->onAuthenticationFailure($request, $exception);
+        return $this->failureHandler->onAuthenticationFailure($request, $exception);
     }
 
     /**
@@ -128,6 +130,6 @@ class AgentAuthenticator extends SocialAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return (new AgentAuthenticationSuccessHandler())->onAuthenticationSuccess($request, $token);
+        return $this->successHandler->onAuthenticationSuccess($request, $token);
     }
 }
