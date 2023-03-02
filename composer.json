@@ -1,5 +1,5 @@
 {
-    "name": "gabsi/spryker-social-oauth",
+    "name": "towa/spryker-social-oauth",
     "type": "library",
     "description": "Social OAuth Module for Spryker",
     "license": "proprietary",
